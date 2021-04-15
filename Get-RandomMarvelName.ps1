@@ -38,7 +38,7 @@ $Params = @{
 }
 
 # Let's make the actual call
-$resultNoOffset = Invoke-RestMethod @Params
+$resultOffset = Invoke-RestMethod @Params
 
 # Store the list of names in $names and then remove characters that aren't support by Azure naming conventions
 # Quote out the stuff you don't need.
@@ -46,7 +46,7 @@ $resultNoOffset = Invoke-RestMethod @Params
 $chars = '!', '""', ' ', '#', '£', '$', '%', '&', '^', '*', '(', ')', '@', '=', '+', '<', '>', '.', '?', '/', ':', ';', "'", "-"
 $chars = [string]::join('|', ($chars | % {[regex]::escape($_)}))
 
-$names = $resultNoOffset.data.results.name
+$names = $resultOffset.data.results.name
 $name = $names | Get-Random
 $name = $name.split('(')[0] 
 $name = $name.ToLower()
